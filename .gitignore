@@ -1,0 +1,9 @@
+# dbt artifacts
+target/
+dbt_packages/
+logs/
+
+# Python/Env
+__pycache__/
+venv/
+.env
