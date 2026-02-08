@@ -2,8 +2,10 @@
 target/
 dbt_packages/
 logs/
+seeds/raw_ga4_export.csv
 
 # Python/Env
 __pycache__/
 venv/
 .env
+dbt_internal_packages/

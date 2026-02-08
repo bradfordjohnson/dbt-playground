@@ -32,5 +32,45 @@ clean-targets:         # directories to be removed by `dbt clean`
 models:
   analytics:
     # Config indicated by + and applies to all files under models/example/
-    example:
+    staging:
       +materialized: view
+    marts:
+      +materialized: table
+seeds:
+  analytics:
+    +column_types:
+      # --- 1. THE BIG TIMESTAMPS (Must be bigint) ---
+      event_timestamp: bigint
+      event_previous_timestamp: bigint
+      user_first_touch_timestamp: bigint
+      event_server_timestamp_offset: bigint
+
+      # --- 2. THE BATCH/SEQUENCE IDs (Must be bigint) ---
+      event_bundle_sequence_id: bigint
+      batch_event_index: bigint
+      batch_page_id: bigint
+      batch_ordering_id: bigint
+
+      # --- 3. NESTED RECORDS (Must be text for Postgres) ---
+      # BigQuery exports these as JSON strings in the CSV
+      event_params: text
+      user_properties: text
+      device: text
+      geo: text
+      traffic_source: text
+      app_info: "text"
+      ecommerce: text
+      items: text
+      collected_traffic_source: text
+      session_traffic_source_last_click: text
+      publisher: text
+      privacy_info: text
+      user_ltv: text
+      event_dimensions: text
+
+      # --- 4. IDENTIFIERS (Must be text) ---
+      user_pseudo_id: text
+      user_id: text
+      stream_id: text
+      platform: text
+      event_date: text
